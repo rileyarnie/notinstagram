@@ -1,7 +1,7 @@
 
 # Created by https://www.gitignore.io/api/venv,react,django,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=venv,react,django,visualstudiocode
-
+.vscode
 ### Django ###
 *.log
 *.pot
