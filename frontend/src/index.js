@@ -6,9 +6,7 @@ import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
 import { ApolloProvider, Query } from "react-apollo";
 import ApolloClient, { gql } from "apollo-boost";
-import PostList from "./components/PostList";
 import Auth from "./components/auth/Auth";
-import { Navbar } from "react-bootstrap";
 
 const client = new ApolloClient({
   uri: "http://localhost:8000/graphql/",

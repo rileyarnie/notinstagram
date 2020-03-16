@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as ReactBootstrap from "react-bootstrap";
-import { gql } from "apollo-boost";
-import { Query } from "react-apollo";
+
+
 class NavigationBar extends Component {
   render() {
     return (
