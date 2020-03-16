@@ -52,7 +52,12 @@ class Login extends Component {
                 <Form.Row>
                   <Form.Group>
                     <Col>
-                      <Button className="" variant="primary" type="submit">
+                      <Button className="" variant="primary" type="submit"
+                      disabled={
+                        loading ||
+                        !username.trim() ||
+                        !password.trim() }
+                      >
                         Submit
                       </Button>
                     </Col>
