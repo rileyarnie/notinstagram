@@ -1,27 +1,44 @@
 import React, { Component } from "react";
 import { Query } from "react-apollo";
 import { gql } from "apollo-boost";
+import Post from "./Post";
 
 class PostList extends Component {
   render() {
     return (
-      <Query query={ME_QUERY}>
-        {({ data, error, loading }) => {
-          console.log("*****", { data });
-          if (loading) return <div>Loading!</div>;
-          if (error) return <div>Error!! Something Wrong</div>;
-          return <div>{data.me.username}</div>;
-        }}
-      </Query>
+      <>
+        <Query query={POSTS_QUERY}>
+          {({ data, error, loading }) => {
+            if (loading) return <div>Loading!</div>;
+            if (error) return <div>Error!! Something Wrong</div>;
+            if (!data) return <div>Not Found</div>;
+            console.log(data);
+            console.log(data.posts);
+
+            return (
+              <div>
+                {data.posts.map(post => (
+                  <Post key={post.id} post={post} />
+                ))}
+              </div>
+            );
+          }}
+        </Query>
+      </>
     );
   }
 }
 export default PostList;
 
-const ME_QUERY = gql`
+const POSTS_QUERY = gql`
   {
-    me {
-      username
+    posts {
+      id
+      image
+      caption
+      postedBy {
+        username
+      }
     }
   }
 `;

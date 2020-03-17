@@ -77,12 +77,6 @@ class Login extends Component {
   }
 }
 
-// _confirm = async () => {};
-
-// _saveUserData = token => {
-//   localStorage.setItem(AUTH_TOKEN, token);
-// };
-
 export default Login;
 
 const LOGIN_MUTATION = gql`
