@@ -1,7 +1,12 @@
 import graphene
 from django.contrib.auth import get_user_model
 from graphene_django import DjangoObjectType
+from insta.models import Profile
 
+
+class ProfileType(DjangoObjectType):
+    class Meta:
+        model = Profile
 
 class UserType(DjangoObjectType):
     class Meta:
@@ -11,6 +16,7 @@ class UserType(DjangoObjectType):
 class Query(graphene.ObjectType):
     me = graphene.Field(UserType)
     users = graphene.List(UserType)
+    profile = graphene.List(ProfileType)
 
     def resolve_users(self, info):
         return get_user_model().objects.all()
