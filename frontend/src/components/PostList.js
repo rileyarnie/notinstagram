@@ -38,6 +38,9 @@ const POSTS_QUERY = gql`
       caption
       postedBy {
         username
+        profile{
+          pic
+        }
       }
     }
   }
