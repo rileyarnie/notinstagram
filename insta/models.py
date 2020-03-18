@@ -14,6 +14,9 @@ class Post(models.Model):
     posted_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     date_posted = models.DateField(auto_now_add=True)
 
+    class Meta:
+        ordering = ["date_posted"]
+
 
 class Profile(models.Model):
     pic = models.ImageField(default="default.jpg", upload_to="profile_pics")
@@ -33,6 +36,12 @@ class Profile(models.Model):
 
 
 class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments", null=True)
     content = models.TextField()
     posted_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     date_posted = models.DateField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["date_posted"]
+
+    
