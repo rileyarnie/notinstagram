@@ -36,7 +36,9 @@ class Profile(models.Model):
 
 
 class Comment(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments", null=True)
+    post = models.ForeignKey(
+        Post, on_delete=models.CASCADE, related_name="comments", null=True
+    )
     content = models.TextField()
     posted_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     date_posted = models.DateField(auto_now_add=True)
@@ -44,4 +46,8 @@ class Comment(models.Model):
     class Meta:
         ordering = ["date_posted"]
 
-    
+
+class Like(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True)
+    track = models.ForeignKey(Post, related_name="likes", on_delete=models.CASCADE)
+

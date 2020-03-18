@@ -8,6 +8,7 @@ class ProfileType(DjangoObjectType):
     class Meta:
         model = Profile
 
+
 class UserType(DjangoObjectType):
     class Meta:
         model = get_user_model()
