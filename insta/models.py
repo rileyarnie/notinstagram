@@ -40,7 +40,7 @@ class Comment(models.Model):
         Post, on_delete=models.CASCADE, related_name="comments", null=True
     )
     content = models.TextField()
-    posted_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     date_posted = models.DateField(auto_now_add=True)
 
     class Meta:
@@ -49,5 +49,7 @@ class Comment(models.Model):
 
 class Like(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True)
-    track = models.ForeignKey(Post, related_name="likes", on_delete=models.CASCADE)
+    post = models.ForeignKey(
+        "insta.Post", related_name="likes", on_delete=models.CASCADE
+    )
 
