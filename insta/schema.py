@@ -1,5 +1,5 @@
 import graphene
-from .models import Post, Comment
+from .models import Post, Comment, Like
 from graphene_django import DjangoObjectType
 from django.contrib.auth import get_user_model
 from user.schema import UserType
@@ -43,27 +43,52 @@ class CreatePost(graphene.Mutation):
         return CreatePost(post=post)
 
 
-# class CreateComment(graphene.Mutation):
-#     user = graphene.Field(UserType)
-#     post = graphene.Field(PostType)
+class CreateComment(graphene.Mutation):
+    user = graphene.Field(UserType)
+    post = graphene.Field(PostType)
 
-#     class Arguments:
-#         post_id = graphene.Int(required=True)
+    class Arguments:
+        post_id = graphene.Int(required=True)
+        content = graphene.String(required=True)
 
-#     def mutate(self, info, post_id):
-#         user = info.context.user
-#         post = Post.objects.get(id=post_id)
+    def mutate(self, info, post_id, content):
+        user = info.context.user
+        post = Post.objects.get(id=post_id)
 
-#         if user.is_anonymous:
-#             raise Exception("Please Login to comment!")
+        if user.is_anonymous:
+            raise Exception("Please Login to comment!")
 
-#         if not Post:
-#             raise Exception("Can't find that post. Sorry!")
+        if not Post:
+            raise Exception("Can't find that post. Sorry!")
 
-#         Comment.objects.create(user=user, post=post)
-#         return CreateComment(user=user, post=post)
+        comment = Comment.objects.create(user=user, post=post, content=content)
+        comment.save()
+        return CreateComment(user=user, post=post)
+
+
+class CreateLike(graphene.Mutation):
+    user = graphene.Field(UserType)
+    post = graphene.Field(PostType)
+
+    class Arguments:
+        post_id = graphene.Int(required=True)
+
+    def mutate(self, info, post_id):
+        user = info.context.user
+
+        if user.is_anonymous:
+            raise Exception("Please Log In to like posts")
+        post = Post.objects.get(id=post_id)
+
+        if not post:
+            raise Exception("Can't find post")
+
+        Like.objects.create(user=user, post=post)
+
+        return CreateLike(user=user, post=post)
 
 
 class Mutations(graphene.ObjectType):
     create_post = CreatePost.Field()
     create_comment = CreateComment.Field()
+    create_like = CreateLike.Field()
