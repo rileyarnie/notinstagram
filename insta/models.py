@@ -4,26 +4,35 @@ import datetime
 from django.contrib.auth.models import User
 import PIL
 from PIL import Image
+
 # Create your models here.
 
+
 class Post(models.Model):
-    image=models.ImageField(null=False)
-    caption=models.TextField(null=False)
+    image = models.ImageField(null=False)
+    caption = models.TextField(null=False)
     posted_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    date_posted=models.DateField(auto_now_add=True)
+    date_posted = models.DateField(auto_now_add=True)
+
 
 class Profile(models.Model):
-    pic = models.ImageField(default = 'default.jpg', upload_to ='profile_pics')
-    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    pic = models.ImageField(default="default.jpg", upload_to="profile_pics")
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return (f"{self.user}'s profile")
+        return f"{self.user}'s profile"
 
     def save(self, *args, **kwargs):
         super(Profile, self).save(*args, **kwargs)
         img = PIL.Image.open(self.pic.path)
 
-        if img.height > 300 or img.width >300:
-            output_size = (152,152)
+        if img.height > 300 or img.width > 300:
+            output_size = (152, 152)
             img.thumbnail(output_size)
             img.save(self.pic.path)
+
+
+class Comment(models.Model):
+    content = models.TextField()
+    posted_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    date_posted = models.DateField(auto_now_add=True)
