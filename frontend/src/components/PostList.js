@@ -52,3 +52,4 @@ const POSTS_QUERY = gql`
     }
   }
 `;
+

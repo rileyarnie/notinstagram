@@ -7,18 +7,20 @@ class NavigationBar extends Component {
     return (
       <ReactBootstrap.Navbar bg="" expand="lg">
         <ReactBootstrap.Navbar.Brand href="#home">
-        {/* <img width="250" src="https://www.edigitalagency.com.au/wp-content/uploads/instagram-logo-and-icon-black-and-white-text-glyph-png.png"/> */}
-        <img  src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"/>
+          <img src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png" />
         </ReactBootstrap.Navbar.Brand>
         <ReactBootstrap.Navbar.Toggle aria-controls="basic-navbar-nav" />
         <ReactBootstrap.Navbar.Collapse id="basic-navbar-nav">
           <ReactBootstrap.Nav className="mr-auto">
-          <ReactBootstrap.Nav.Link href="/">Home</ReactBootstrap.Nav.Link>
-          <ReactBootstrap.Nav.Link href="/">Profile</ReactBootstrap.Nav.Link>
+            <ReactBootstrap.Nav.Link href="/">Home</ReactBootstrap.Nav.Link>
+            <ReactBootstrap.Nav.Link href="/">Profile</ReactBootstrap.Nav.Link>
             <ReactBootstrap.Nav.Link href="/login">
               Login
             </ReactBootstrap.Nav.Link>
-            <ReactBootstrap.Nav.Link href="/" onClick={console.log('logging out...')}>
+            <ReactBootstrap.Nav.Link
+              href="/"
+              onClick={console.log("logging out...")}
+            >
               Logout
             </ReactBootstrap.Nav.Link>
           </ReactBootstrap.Nav>
@@ -39,4 +41,3 @@ class NavigationBar extends Component {
 }
 
 export default NavigationBar;
-

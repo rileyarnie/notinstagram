@@ -3,6 +3,7 @@ from .models import Post, Comment, Like
 from graphene_django import DjangoObjectType
 from django.contrib.auth import get_user_model
 from user.schema import UserType
+from graphql_jwt.decorators import login_required
 
 
 class PostType(DjangoObjectType):
@@ -36,7 +37,8 @@ class CreatePost(graphene.Mutation):
         image = graphene.String()
         caption = graphene.String()
         posted_by = graphene.String()
-
+   
+    @login_required
     def mutate(self, info, image, caption, posted_by):
         user = info.context.user
         post = Post(image=image, caption=caption, posted_by=user)
@@ -52,6 +54,7 @@ class CreateComment(graphene.Mutation):
         post_id = graphene.Int(required=True)
         content = graphene.String(required=True)
 
+    @login_required
     def mutate(self, info, post_id, content):
         user = info.context.user
         post = Post.objects.get(id=post_id)

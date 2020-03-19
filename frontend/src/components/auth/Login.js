@@ -9,7 +9,7 @@ class Login extends Component {
     password: ""
   };
 
-  render() {
+  render() { 
     const { username, password } = this.state;
 
     const handleSubmit = async (event, tokenAuth, client) => {
