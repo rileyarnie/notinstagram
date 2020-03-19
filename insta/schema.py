@@ -11,6 +11,7 @@ class PostType(DjangoObjectType):
 
 
 class CommentType(DjangoObjectType):
+    
     class Meta:
         model = Comment
 
@@ -19,13 +20,13 @@ class Query(graphene.ObjectType):
     posts = graphene.List(PostType)
     comments = graphene.List(CommentType)
 
-    def resolve_comment(self, info):
-        comments = Comment.objects.all()
-        return comments
-
     def resolve_posts(self, info):
         posts = Post.objects.all()
         return posts
+
+    def resolve_comments(self, info):
+        comments = Comment.objects.all()
+        return comments
 
 
 class CreatePost(graphene.Mutation):
