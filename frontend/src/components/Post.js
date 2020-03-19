@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import "../styles/Post.css";
+import Comment from "./Comment";
+import { Form, Col, Button } from "react-bootstrap";
 
 class Post extends Component {
   render() {
@@ -28,6 +30,23 @@ class Post extends Component {
         </div>
         <div className="Post-caption">
           <strong>{this.props.post.caption}</strong>
+        </div>
+        <div>
+          <h6 >comments</h6>
+          {this.props.post.comments.map(comment => (
+            <Comment key={comment.id} comment={comment} />
+          ))}
+          <Form.Row className="mt-3">
+            <Form.Group as={Col}>
+              <Form.Control type="text" placeholder="Post a comment" />
+            </Form.Group>
+
+            <Form.Group as={Col}>
+              <Button variant="primary" size="sm">
+                Comment
+              </Button>{" "}
+            </Form.Group>
+          </Form.Row>
         </div>
       </article>
     );
