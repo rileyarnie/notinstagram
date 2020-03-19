@@ -13,7 +13,7 @@ class PostList extends Component {
             if (error) return <div>Error!! Something Wrong</div>;
             if (!data) return <div>Not Found</div>;
             console.log(data);
-            console.log(data.posts);
+            console.log(data.posts.comments);
 
             return (
               <div>
@@ -38,9 +38,16 @@ const POSTS_QUERY = gql`
       caption
       postedBy {
         username
-        profile{
+        profile {
           pic
         }
+      }
+      comments {
+        content
+        user {
+          username
+        }
+        datePosted
       }
     }
   }
