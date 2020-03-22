@@ -2,30 +2,34 @@ import React from "react";
 import "../styles/App.css";
 import NavigationBar from "./navigation/NavigationBar";
 import PostList from "./PostList";
-import { Container } from "react-bootstrap";
 import { Query } from "react-apollo";
 import { gql } from "apollo-boost";
+import Profile from "./pages/Profile"
+import NewPost from "./pages/NewPost"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-export const UserContenxt = React.createContext();
+
+
 
 function App() {
   return (
     <div className="App">
       <Query query={ME_QUERY}>
         {({ data, loading, error }) => {
-          console.log("haha ooy", { data });
 
           if (loading) return <div>Loading....</div>;
           if (error) return <div>Something went wrong....</div>;
-          const currentUser = data.me
-          console.log("current user data",{currentUser})
+          const currentUser = data.me;
+          console.log("current user data", { currentUser });
           return (
-            <>
-              <NavigationBar currentUser={currentUser} />
-              <Container>
-                <PostList />
-              </Container>
-            </>
+            <Router>
+                <NavigationBar currentUser={currentUser} />
+                <Switch>
+                  <Route exact path="/" component={PostList} />
+                  <Route exact path="/profile/:id" component={Profile} />
+                  <Route exact path="/new-post" component={NewPost} />
+                </Switch>
+            </Router>
           );
         }}
       </Query>
