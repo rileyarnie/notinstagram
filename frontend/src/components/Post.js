@@ -19,13 +19,13 @@ class Post extends Component {
     const { content, postId } = this.state;
 
     return (
-      <article className="Post" ref="Post">
+      <article className="Post" ref="Post" >
         <header>
           <div className="Post-user">
             <div className="Post-user-avatar">
               <img
                 src={`http://localhost:8000/media/${this.props.post.postedBy.profile.pic}`}
-                alt="photo"
+                alt="picha"
               />
             </div>
             <div className="Post-user-nickname">
@@ -37,7 +37,7 @@ class Post extends Component {
           <div className="Post-image-bg">
             <img
               alt="Icon Living"
-              src={`http://localhost:8000/media/${this.props.post.image}`}
+              src={`${this.props.post.image}`}
             />
           </div>
         </div>
