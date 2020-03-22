@@ -1,39 +1,48 @@
 import React, { Component } from "react";
 import * as ReactBootstrap from "react-bootstrap";
-import { gql } from "apollo-boost";
-import { Query } from "react-apollo";
+import { Link } from "react-router-dom";
+import "../../styles/NavigationBar.css";
+
 class NavigationBar extends Component {
   render() {
     return (
       <ReactBootstrap.Navbar bg="" expand="lg">
-        <ReactBootstrap.Navbar.Brand href="#home">
-          <img src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png" />
+        <ReactBootstrap.Navbar.Brand>
+          <Link to="/">
+            <img
+              src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
+              alt="picha"
+            />
+          </Link>
         </ReactBootstrap.Navbar.Brand>
         <ReactBootstrap.Navbar.Toggle aria-controls="basic-navbar-nav" />
         <ReactBootstrap.Navbar.Collapse id="basic-navbar-nav">
-          <ReactBootstrap.Nav className="mr-auto">
-            <ReactBootstrap.Nav.Link href="/">Home</ReactBootstrap.Nav.Link>
-            <ReactBootstrap.Nav.Link href="/">Profile</ReactBootstrap.Nav.Link>
-            <ReactBootstrap.Nav.Link href="/login">
-              Login
-            </ReactBootstrap.Nav.Link>
-            <ReactBootstrap.Nav.Link
-              href="/"
-              onClick={console.log("logging out...")}
-            >
-              Logout
-            </ReactBootstrap.Nav.Link>
+          <ReactBootstrap.Nav className="ml-auto">
+            <ReactBootstrap.Nav.Item>
+              <Link to="/">
+                <img
+                  alt="picha"
+                  src="https://img.icons8.com/material-rounded/24/000000/home.png"
+                />
+              </Link>
+            </ReactBootstrap.Nav.Item>
+            <ReactBootstrap.Nav.Item>
+              <Link to="/">
+                <img
+                  alt="picha"
+                  src="https://img.icons8.com/android/24/000000/user.png"
+                />
+              </Link>
+            </ReactBootstrap.Nav.Item>
+            <ReactBootstrap.Nav.Item>
+              <Link to="/new-post">
+                <img
+                  alt="picha"
+                  src="https://img.icons8.com/material-outlined/24/000000/add.png"
+                />
+              </Link>
+            </ReactBootstrap.Nav.Item>
           </ReactBootstrap.Nav>
-          <ReactBootstrap.Form inline>
-            <ReactBootstrap.FormControl
-              type="text"
-              placeholder="Search"
-              className="mr-sm-2"
-            />
-            <ReactBootstrap.Button variant="outline-success">
-              Search
-            </ReactBootstrap.Button>
-          </ReactBootstrap.Form>
         </ReactBootstrap.Navbar.Collapse>
       </ReactBootstrap.Navbar>
     );
