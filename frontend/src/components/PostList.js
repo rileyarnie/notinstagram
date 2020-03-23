@@ -18,7 +18,7 @@ class PostList extends Component {
             return (
               <div>
                 {data.posts.map(post => (
-                  <Post key={post.id} post={post} />
+                  <Post key={post.id} post={post} currentUser={this.props.currentUser} />
                 ))}
               </div>
             );

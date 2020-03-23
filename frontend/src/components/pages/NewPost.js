@@ -72,7 +72,6 @@ class NewPost extends Component {
                           this.setState({ caption: event.target.value })
                         }
                       />
-                      {console.log("please work", this.state)}
                     </Form.Group>
                   </Form>
                 </Modal.Body>

@@ -7,6 +7,7 @@ import { gql } from "apollo-boost";
 import Profile from "./pages/Profile"
 import NewPost from "./pages/NewPost"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import DeletePost from "./pages/DeletePost";
 
 
 
@@ -25,8 +26,9 @@ function App() {
             <Router>
                 <NavigationBar currentUser={currentUser} />
                 <Switch>
-                  <Route exact path="/" component={PostList} />
+                  <Route exact path="/" render={(props)=><PostList {...props} currentUser={currentUser}/>}/>
                   <Route exact path="/profile/:id" component={Profile} />
+                  <Route exact path="/delete-post/:id" component={DeletePost} />
                   <Route exact path="/new-post" component={NewPost} />
                 </Switch>
             </Router>

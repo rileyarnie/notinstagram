@@ -4,6 +4,7 @@ import Comment from "./Comment";
 import { Form, Col, Button } from "react-bootstrap";
 import { gql } from "apollo-boost";
 import { Mutation } from "react-apollo";
+import { Link } from "react-router-dom";
 
 class Post extends Component {
   state = {
@@ -19,7 +20,7 @@ class Post extends Component {
     const { content, postId } = this.state;
 
     return (
-      <article className="Post" ref="Post" >
+      <article className="Post" ref="Post">
         <header>
           <div className="Post-user">
             <div className="Post-user-avatar">
@@ -35,12 +36,16 @@ class Post extends Component {
         </header>
         <div className="Post-image">
           <div className="Post-image-bg">
-            <img
-              alt="Icon Living"
-              src={`${this.props.post.image}`}
-            />
+            <img alt="Icon Living" src={`${this.props.post.image}`} />
           </div>
         </div>
+        {this.props.post.postedBy.username == this.props.currentUser.username ? (
+          <Link to= {`/delete-post/${this.props.post.id}`}>
+          <img  src="https://img.icons8.com/cute-clipart/24/000000/delete-forever.png" />
+          </Link>
+        ) : (
+          ""
+        )}
         <div className="Post-caption">
           <strong>{this.props.post.caption}</strong>
         </div>
@@ -79,7 +84,12 @@ class Post extends Component {
                     />
                   </Form.Group>
                   <Form.Group as={Col}>
-                    <Button variant="primary" size="sm" type="submit" onClick={event => handleSubmit(event, createComment)}>
+                    <Button
+                      variant="primary"
+                      size="sm"
+                      type="submit"
+                      onClick={event => handleSubmit(event, createComment)}
+                    >
                       Comment
                     </Button>{" "}
                   </Form.Group>
