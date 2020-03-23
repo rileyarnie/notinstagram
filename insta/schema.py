@@ -12,7 +12,6 @@ class PostType(DjangoObjectType):
 
 
 class CommentType(DjangoObjectType):
-    
     class Meta:
         model = Comment
 
@@ -34,10 +33,10 @@ class CreatePost(graphene.Mutation):
     post = graphene.Field(PostType)
 
     class Arguments:
-        image = graphene.String()
+        image = graphene.String(required=True)
         caption = graphene.String()
         posted_by = graphene.String()
-   
+
     @login_required
     def mutate(self, info, image, caption, posted_by):
         user = info.context.user
@@ -70,6 +69,18 @@ class CreateComment(graphene.Mutation):
         return CreateComment(user=user, post=post)
 
 
+class DeletePost(graphene.Mutation):
+    post = graphene.Field(PostType)
+
+    class Arguments:
+        post_id = graphene.Int()
+
+    def mutate(self, info, post_id):
+        post = Post.objects.get(id=post_id)
+        post.delete()
+        return post
+
+
 class CreateLike(graphene.Mutation):
     user = graphene.Field(UserType)
     post = graphene.Field(PostType)
@@ -96,3 +107,4 @@ class Mutations(graphene.ObjectType):
     create_post = CreatePost.Field()
     create_comment = CreateComment.Field()
     create_like = CreateLike.Field()
+    delete_post=DeletePost.Field()

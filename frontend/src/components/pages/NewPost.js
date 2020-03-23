@@ -53,9 +53,10 @@ class NewPost extends Component {
                       onChange={file => {
                         this.setState({ image: file.cdnUrl });
 
-                        console.log(file.cdnUrl);
+                        console.log(file);
                       }}
                     />
+                    
                   </p>
                   <Form
                     onSubmit={event => {
@@ -102,7 +103,7 @@ class NewPost extends Component {
 export default withRouter(NewPost);
 
 const NEW_POST = gql`
-  mutation($caption: String, $image: String, $postedBy: String) {
+  mutation($caption: String, $image: String!, $postedBy: String) {
     createPost(caption: $caption, image: $image, postedBy: $postedBy) {
       post {
         image
