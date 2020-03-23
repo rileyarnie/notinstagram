@@ -39,9 +39,9 @@ class Post extends Component {
             <img alt="Icon Living" src={`${this.props.post.image}`} />
           </div>
         </div>
-        {this.props.post.postedBy.username == this.props.currentUser.username ? (
+        {this.props.post.postedBy.username === this.props.currentUser.username ? (
           <Link to= {`/delete-post/${this.props.post.id}`}>
-          <img  src="https://img.icons8.com/cute-clipart/24/000000/delete-forever.png" />
+          <img  src="https://img.icons8.com/cute-clipart/24/000000/delete-forever.png" alt="delete" />
           </Link>
         ) : (
           ""
