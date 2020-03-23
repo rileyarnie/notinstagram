@@ -70,7 +70,7 @@ class CreateComment(graphene.Mutation):
 
 
 class DeletePost(graphene.Mutation):
-    post = graphene.Field(PostType)
+    post_id = graphene.Int()
 
     class Arguments:
         post_id = graphene.Int()
@@ -78,7 +78,7 @@ class DeletePost(graphene.Mutation):
     def mutate(self, info, post_id):
         post = Post.objects.get(id=post_id)
         post.delete()
-        return post
+        return DeletePost(post_id=post_id)
 
 
 class CreateLike(graphene.Mutation):
