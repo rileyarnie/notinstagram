@@ -20,7 +20,7 @@ class Post extends Component {
     const { content, postId } = this.state;
 
     return (
-      <article className="Post" ref="Post">
+      <article className="Post" ref="Post" key={this.props.post.id}>
         <header>
           <div className="Post-user">
             <div className="Post-user-avatar">
@@ -51,9 +51,12 @@ class Post extends Component {
         </div>
         <div>
           <h6>comments</h6>
+          
           {this.props.post.comments.map(comment => (
             <Comment key={comment.id} comment={comment} />
+            
           ))}
+          
           <Mutation
             mutation={CREATE_COMMENT}
             variables={{ content, postId }}

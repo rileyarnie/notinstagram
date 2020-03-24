@@ -12,13 +12,14 @@ class PostList extends Component {
             if (loading) return <div>Loading!</div>;
             if (error) return <div>Error!! Something Wrong</div>;
             if (!data) return <div>Not Found</div>;
-            console.log(data);
-            console.log(data.posts.comments);
-
             return (
               <div>
                 {data.posts.map(post => (
-                  <Post key={post.id} post={post} currentUser={this.props.currentUser} />
+                  <Post
+                    key={post.id}
+                    post={post}
+                    currentUser={this.props.currentUser}
+                  />
                 ))}
               </div>
             );
@@ -43,13 +44,14 @@ const POSTS_QUERY = gql`
         }
       }
       comments {
+        id
         content
         user {
           username
+          id
         }
         datePosted
       }
     }
   }
 `;
-
