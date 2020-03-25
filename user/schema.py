@@ -16,6 +16,7 @@ class UserType(DjangoObjectType):
 
 class Query(graphene.ObjectType):
     me = graphene.Field(UserType)
+    user = graphene.Field(UserType, id=graphene.Int(required=True))
     users = graphene.List(UserType)
     profile = graphene.List(ProfileType)
 
@@ -27,6 +28,12 @@ class Query(graphene.ObjectType):
         if user.is_anonymous:
             raise Exception("Please Log In!!")
 
+        return user
+
+    def resolve_user(self, info, id):
+        user = get_user_model().objects.get(id=id)
+        if not user:
+            raise Exception("Sorry, user doesn't exist")
         return user
 
 
@@ -51,4 +58,3 @@ class CreateUser(graphene.Mutation):
 
 class Mutation(graphene.ObjectType):
     create_user = CreateUser.Field()
-
