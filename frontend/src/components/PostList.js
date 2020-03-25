@@ -32,26 +32,31 @@ class PostList extends Component {
 export default PostList;
 
 const POSTS_QUERY = gql`
-  {
-    posts {
+{
+  posts {
+    id
+    image
+    caption
+    postedBy {
       id
-      image
-      caption
-      postedBy {
-        username
-        profile {
-          pic
-        }
-      }
-      comments {
-        id
-        content
-        user {
-          username
-          id
-        }
-        datePosted
+      username
+      profile {
+        pic
       }
     }
+    comments {
+      id
+      content
+      user {
+        username
+        id
+      }
+      datePosted
+    }
+    likes {
+      id
+    }
   }
+}
+
 `;
