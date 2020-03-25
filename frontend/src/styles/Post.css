@@ -17,9 +17,38 @@
     margin-right: 20%;
     width: 400px;
   }
+
 }
 
+img#like {
+  margin-top: 4px;
+  margin-left: 4px;
+  float: left;
+}
 
+p#likes {
+  float: left;
+  margin-top: 4px;
+  /* margin-left: auto; */
+}
+
+@media only screen and (min-width: 445px) {
+
+  .delete {
+    margin-right: -62%;
+}
+}
+
+@media only screen and (max-width: 445px) {
+
+  .delete {
+    margin-right: -45%;
+}
+}
+
+.delete {
+  flex: auto;
+}
 .Post-user {
   display: flex;
   padding: 16px;
@@ -49,6 +78,8 @@
 }
 .Post-caption {
   padding: 16px 16px;
+  margin-top: 5px;
+  text-align: left;
 }
 .Post-caption strong {
   font-family: "PT Sans", sans-serif;
