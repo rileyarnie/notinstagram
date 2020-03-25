@@ -5,6 +5,7 @@ import { Form, Col, Button } from "react-bootstrap";
 import { gql } from "apollo-boost";
 import { Mutation } from "react-apollo";
 import { Link } from "react-router-dom";
+import Like from "./Like";
 
 class Post extends Component {
   state = {
@@ -30,7 +31,22 @@ class Post extends Component {
               />
             </div>
             <div className="Post-user-nickname">
-              <span>{this.props.post.postedBy.username}</span>
+              <Link to={`/profile/${this.props.post.postedBy.id}`}>
+                <span>{this.props.post.postedBy.username}</span>
+              </Link>
+            </div>
+            <div className="delete">
+              {this.props.post.postedBy.username ===
+              this.props.currentUser.username ? (
+                <Link to={`/delete-post/${this.props.post.id}`}>
+                  <img
+                    src="https://img.icons8.com/officexs/16/000000/delete-sign.png"
+                    alt="delete"
+                  />
+                </Link>
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </header>
@@ -39,24 +55,21 @@ class Post extends Component {
             <img alt="Icon Living" src={`${this.props.post.image}`} />
           </div>
         </div>
-        {this.props.post.postedBy.username === this.props.currentUser.username ? (
-          <Link to= {`/delete-post/${this.props.post.id}`}>
-          <img  src="https://img.icons8.com/cute-clipart/24/000000/delete-forever.png" alt="delete" />
-          </Link>
-        ) : (
-          ""
-        )}
+        <div>
+          {console.log(this.props.post.likes.length)}
+          <Like postId={this.props.post.id} likeCount = {this.props.post.likes.length} />
+        </div>
+        <br/>
         <div className="Post-caption">
           <strong>{this.props.post.caption}</strong>
         </div>
         <div>
           <h6>comments</h6>
-          
+
           {this.props.post.comments.map(comment => (
             <Comment key={comment.id} comment={comment} />
-            
           ))}
-          
+
           <Mutation
             mutation={CREATE_COMMENT}
             variables={{ content, postId }}
