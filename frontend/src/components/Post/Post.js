@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import "../styles/Post.css";
-import Comment from "./Comment";
+import "./Post.css";
+import Comment from "../Comment";
 import { Form, Col, Button } from "react-bootstrap";
 import { gql } from "apollo-boost";
 import { Mutation } from "react-apollo";
 import { Link } from "react-router-dom";
-import Like from "./Like";
+import Like from "../Like";
 
 class Post extends Component {
   state = {
@@ -52,7 +52,13 @@ class Post extends Component {
         </header>
         <div className="Post-image">
           <div className="Post-image-bg">
-            <img alt="Icon Living" src={`${this.props.post.image}`} />
+            <img 
+             onDoubleClick={(event)=>{
+
+              console.log("I like this")}
+            }
+            
+            alt="Icon Living" src={`${this.props.post.image}`} />
           </div>
         </div>
         <div>

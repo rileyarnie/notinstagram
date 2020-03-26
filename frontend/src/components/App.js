@@ -1,10 +1,10 @@
 import React from "react";
 import "../styles/App.css";
 import NavigationBar from "./navigation/NavigationBar";
-import PostList from "./PostList";
+import PostList from "./pages/homepage/PostList"
 import { Query } from "react-apollo";
 import { gql } from "apollo-boost";
-import Profile from "./pages/Profile"
+import Profile from "./Profile/Profile"
 import NewPost from "./pages/NewPost"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import DeletePost from "./pages/DeletePost";
