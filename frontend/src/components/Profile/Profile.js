@@ -5,6 +5,11 @@ import { Container } from "react-bootstrap";
 import "./Profile.css";
 
 class Profile extends Component {
+
+state={
+  profilepic:"http://localhost:8000/media/default.jpg"
+}
+
   render() {
     return (
       <Query query={USER_QUERY} variables={{ id: this.props.match.params.id }}>
@@ -19,7 +24,7 @@ class Profile extends Component {
                 <div className="profile">
                   <div className="profile-image">
                     <img
-                      src={`http://localhost:8000/media/${data.user.profile.pic}`}
+                      src={this.state.profilepic}
                       alt=""
                     />
                   </div>
@@ -29,14 +34,7 @@ class Profile extends Component {
                     <button className="btn profile-edit-btn">
                       Edit Profile
                     </button>
-                    
 
-                    {/* <button
-                      className="btn profile-settings-btn"
-                      aria-label="profile settings"
-                    >
-                      <img src="https://img.icons8.com/material-sharp/24/000000/settings.png" />{" "}
-                    </button> */}
                   </div>
                   <div className="profile-stats">
                     <ul>
