@@ -28,7 +28,7 @@ SECRET_KEY = "9s(8!)jflkd=l9c!u0!_ly(ncy2u*wtgjp0_p!wrv(1oh9ra0j"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -98,11 +98,7 @@ WSGI_APPLICATION = "app.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-       'default': dj_database_url.config(
-           default=config('DATABASE_URL')
-       )
-   }
+DATABASES = {"default": dj_database_url.config(default=config("DATABASE_URL"))}
 
 
 # Password validation
@@ -135,13 +131,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATIC_URL = "/static/"
 
-STATICFILES_DIR =[
-    os.path.join(BASE_DIR,'static'),
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "build", "static"),
 ]
-
 
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
