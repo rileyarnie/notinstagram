@@ -58,9 +58,6 @@ class Like extends Component {
     );
   }
 
-  componentDidUpdate(prevProps, prevState,snapshot) {
-    console.log("component did update");
-  }
 }
 
 export default Like;
