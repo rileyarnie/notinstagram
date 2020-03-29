@@ -24,7 +24,7 @@ function App() {
           console.log("current user data", { currentUser });
           return (
             <Router>
-                <NavigationBar currentUser={currentUser} />
+                <NavigationBar />
                 <Switch>
                   <Route exact path="/" render={(props)=><PostList {...props} currentUser={currentUser}/>}/>
                   <Route exact path="/profile/:id" component={Profile} />

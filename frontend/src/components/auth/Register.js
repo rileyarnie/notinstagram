@@ -24,9 +24,7 @@ class Register extends Component {
         <Mutation
           mutation={REGISTER_MUTATION}
           variables={{ firstName, lastName, username, email, password }}
-          onCompleted={data => {
-            console.log({ data });
-          }}
+          onCompleted={this.props.newUser}
         >
           {(createUser, { loading, error }) => {
             return (

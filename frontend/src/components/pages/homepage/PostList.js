@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Query } from "react-apollo";
 import { gql } from "apollo-boost";
 import Post from "../../Post/Post"
+import { withRouter } from "react-router";
 
 class PostList extends Component {
   render() {
@@ -29,7 +30,7 @@ class PostList extends Component {
     );
   }
 }
-export default PostList;
+export default withRouter(PostList);
 
 const POSTS_QUERY = gql`
 {

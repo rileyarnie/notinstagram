@@ -2,14 +2,16 @@ import React, { Component } from "react";
 import { Form, Button, Container, Col } from "react-bootstrap";
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
+import { Redirect } from "react-router";
 
 class Login extends Component {
   state = {
     username: "",
-    password: ""
+    password: "",
+    newuser: this.props.newuser
   };
 
-  render() { 
+  render() {
     const { username, password } = this.state;
 
     const handleSubmit = async (event, tokenAuth, client) => {
@@ -22,7 +24,9 @@ class Login extends Component {
     return (
       <Container>
         Login
-        <Mutation mutation={LOGIN_MUTATION} variables={{ username, password }}>
+        <Mutation mutation={LOGIN_MUTATION} variables={{ username, password }}
+        onCompleted={()=><Redirect to="/"/>}
+        >
           {(tokenAuth, { loading, error, called, client }) => {
             return (
               <Form onSubmit={event => handleSubmit(event, tokenAuth, client)}>
@@ -52,11 +56,14 @@ class Login extends Component {
                 <Form.Row>
                   <Form.Group>
                     <Col>
-                      <Button className="" variant="primary" type="submit"
-                      disabled={
-                        loading ||
-                        !username.trim() ||
-                        !password.trim() }
+                      <Button
+                        className=""
+                        variant="primary"
+                        type="submit"
+                        disabled={
+                          loading || !username.trim() || !password.trim()
+                        }
+                        // onClick={() => this.setState({ newuser: false })}
                       >
                         Submit
                       </Button>

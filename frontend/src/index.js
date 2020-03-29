@@ -6,10 +6,10 @@ import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
 import { ApolloProvider, Query } from "react-apollo";
 import ApolloClient, { gql } from "apollo-boost";
-import Auth from "./components/auth/Auth";
+import Auth from "./components/auth";
 
 const client = new ApolloClient({
-  uri: "https://nottheinsta.herokuapp.com/graphql/",
+  uri: "http://localhost:8000/graphql/",
 
   request: operation => {
     const token = localStorage.getItem("authToken") || "";
