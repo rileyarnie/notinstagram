@@ -14,6 +14,7 @@ class Auth extends Component {
     }
   }
 
+  
   newUserHandler(){
     this.setState({newUser: false})
   }
