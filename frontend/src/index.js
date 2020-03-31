@@ -9,7 +9,7 @@ import ApolloClient, { gql } from "apollo-boost";
 import Auth from "./components/auth";
 
 const client = new ApolloClient({
-  uri: "http://localhost:8000/graphql/",
+  uri: "https://nottheinsta.herokuapp.com/graphql/",
 
   request: operation => {
     const token = localStorage.getItem("authToken") || "";
