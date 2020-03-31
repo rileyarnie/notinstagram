@@ -61,6 +61,7 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
+    "https://notinstagram.now.sh"
 ]
 
 GRAPHENE = {
