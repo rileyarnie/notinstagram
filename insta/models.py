@@ -35,6 +35,7 @@ class Profile(models.Model):
             img.save(self.pic.path)
 
 
+
 class Comment(models.Model):
     post = models.ForeignKey(
         Post, on_delete=models.CASCADE, related_name="comments", null=True
