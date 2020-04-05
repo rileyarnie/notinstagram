@@ -5,10 +5,9 @@ import { Container } from "react-bootstrap";
 import "./Profile.css";
 
 class Profile extends Component {
-
-state={
-  profilepic:"http://localhost:8000/media/default.jpg"
-}
+  state = {
+    profilepic: "http://localhost:8000/media/default.jpg"
+  };
 
   render() {
     return (
@@ -23,10 +22,7 @@ state={
               <Container className="cont">
                 <div className="profile">
                   <div className="profile-image">
-                    <img
-                      src={this.state.profilepic}
-                      alt=""
-                    />
+                    <img src={this.state.profilepic} alt="" />
                   </div>
                   <div className="profile-user-settings">
                     <h1 className="profile-user-name">{data.user.username}</h1>
@@ -34,7 +30,6 @@ state={
                     <button className="btn profile-edit-btn">
                       Edit Profile
                     </button>
-
                   </div>
                   <div className="profile-stats">
                     <ul>
@@ -56,7 +51,6 @@ state={
                       </li>
                     </ul>
                   </div>
-                  
                 </div>
                 <p>1</p>
               </Container>
