@@ -7,26 +7,37 @@ class Auth extends Component {
   constructor(props){
     super(props)
 
-    this.newUserHandler = this.newUserHandler.bind(this)
+    this.registerHandler = this.registerHandler.bind(this)
     this.state={
 
       newUser:true
     }
+
+    this.loginHandler = this.loginHandler.bind(this)
+    this.state={
+
+      newUser:false
+    }
+
+    
   }
 
   
-  newUserHandler(){
+  registerHandler(){
     this.setState({newUser: false})
   }
 
+  loginHandler(){
+    this.setState({newUser: true})
+  }
 
   render() {
     return (
       <div>
         {this.state.newUser ? (
-          <Register newUser={this.newUserHandler}></Register>
+          <Register newUser={this.registerHandler}></Register>
         ) : (
-          <Login newUser={this.state.newUser}></Login>
+          <Login newUser={this.loginHandler}></Login>
         )}
       </div>
     );
