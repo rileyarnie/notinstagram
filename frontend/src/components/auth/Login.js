@@ -3,12 +3,12 @@ import { Form, Button, Container, Col } from "react-bootstrap";
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import { Redirect } from "react-router";
+import { Link, BrowserRouter } from "react-router-dom";
 
 class Login extends Component {
   state = {
     username: "",
     password: "",
-    newuser: this.props.newuser
   };
 
   render() {
@@ -24,8 +24,10 @@ class Login extends Component {
     return (
       <Container>
         Login
-        <Mutation mutation={LOGIN_MUTATION} variables={{ username, password }}
-        onCompleted={()=><Redirect to="/"/>}
+        <Mutation
+          mutation={LOGIN_MUTATION}
+          variables={{ username, password }}
+          onCompleted={() => <Redirect to="/" />}
         >
           {(tokenAuth, { loading, error, called, client }) => {
             return (
@@ -70,7 +72,13 @@ class Login extends Component {
                     </Col>
                     <Col>
                       <Form.Text className="text-muted" md="">
-                        Don't Have an Account? Register.
+                        Don't Have an Account?
+                        <BrowserRouter>
+                          <Link to="/register" onClick={this.props.newUser}>
+                            {" "}
+                            Sign In.
+                          </Link>
+                        </BrowserRouter>
                       </Form.Text>
                     </Col>
                   </Form.Group>

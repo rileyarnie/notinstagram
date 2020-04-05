@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Form, Button, Container, Col } from "react-bootstrap";
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
+import { Link, BrowserRouter } from "react-router-dom";
 
 class Register extends Component {
   state = {
@@ -109,7 +110,10 @@ class Register extends Component {
                     </Col>
                     <Col>
                       <Form.Text className="text-muted" md="">
-                        Already Have an Account? Sign In.
+                        Already Have an Account?
+                        <BrowserRouter>
+                        <Link to="/login" onClick={this.props.newUser}> Sign In.</Link>
+                        </BrowserRouter>
                       </Form.Text>
                     </Col>
                   </Form.Group>
