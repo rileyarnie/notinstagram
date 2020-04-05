@@ -3,8 +3,9 @@ import { Button, Modal } from "react-bootstrap";
 import { withRouter } from "react-router";
 import { gql } from "apollo-boost";
 import { Mutation } from "react-apollo";
+import { POSTS_QUERY } from "./homepage/PostList";
 
-const DeletePost = props => {
+const DeletePost = (props) => {
   const [show, setShow] = useState(true);
 
   const handleClose = () => {
@@ -17,9 +18,24 @@ const DeletePost = props => {
     props.history.push("/");
   };
 
+  const handleUpdateCache = (cache, { data: { deletePost } }) => {
+    const data = cache.readQuery({ query: POSTS_QUERY });
+    const index = data.posts.findIndex(
+      (post) => Number(post.id) === deletePost.postId
+    );
+    const posts = [
+      ...data.posts.slice(0, index),
+      ...data.posts.slice(index + 1),
+    ];
+    cache.writeQuery({ query: POSTS_QUERY, data: { posts } });
+  };
   return (
     <>
-      <Mutation mutation={DELETE_MUTATION} variables={{postId:props.match.params.id}}>
+      <Mutation
+        mutation={DELETE_MUTATION}
+        variables={{ postId: props.match.params.id }}
+        update={handleUpdateCache}
+      >
         {(deletePost, { error, loading }) => {
           if (loading) return <div>Loading...</div>;
           if (error) return <div>Something went wrong...</div>;
@@ -39,7 +55,7 @@ const DeletePost = props => {
                 <Button
                   variant="danger"
                   type="submit"
-                  onClick={event => handleSubmit(event, deletePost)}
+                  onClick={(event) => handleSubmit(event, deletePost)}
                 >
                   Delete Post
                   {console.log(props.match.params.id)}
@@ -56,9 +72,9 @@ const DeletePost = props => {
 export default withRouter(DeletePost);
 
 const DELETE_MUTATION = gql`
-mutation($postId:Int!){
-    deletePost(postId:$postId){
-  postId
+  mutation($postId: Int!) {
+    deletePost(postId: $postId) {
+      postId
     }
   }
 `;
