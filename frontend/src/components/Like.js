@@ -17,15 +17,6 @@ class Like extends Component {
   };
 
 
-  componentDidMount() {
-    console.log("component did mount");
-  }
-
-  componentDidUpdate(){
-    console.log("component did update")
-  }
-
-
   render() {
 
 

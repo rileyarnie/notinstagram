@@ -27,7 +27,8 @@ class NavigationBar extends Component {
               </Link>
             </ReactBootstrap.Nav.Item>
             <ReactBootstrap.Nav.Item>
-              <Link to="/">
+              <Link to={`profile/${this.props.currentUser.id}`}>
+
                 <img
                   alt="picha"
                   src="https://img.icons8.com/android/24/000000/user.png"

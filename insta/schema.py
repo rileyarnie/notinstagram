@@ -20,12 +20,10 @@ class LikeType(DjangoObjectType):
         model = Like
 
 
-
 class Query(graphene.ObjectType):
     posts = graphene.List(PostType)
     comments = graphene.List(CommentType)
     likes = graphene.List(LikeType)
-
 
     def resolve_posts(self, info):
         posts = Post.objects.all()
@@ -117,4 +115,4 @@ class Mutations(graphene.ObjectType):
     create_post = CreatePost.Field()
     create_comment = CreateComment.Field()
     create_like = CreateLike.Field()
-    delete_post=DeletePost.Field()
+    delete_post = DeletePost.Field()

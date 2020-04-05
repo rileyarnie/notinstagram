@@ -7,9 +7,20 @@ import * as serviceWorker from "./serviceWorker";
 import { ApolloProvider, Query } from "react-apollo";
 import ApolloClient, { gql } from "apollo-boost";
 import Auth from "./components/auth";
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware, compose } from 'redux';
+import reducer from "./store/reducers/reducers";
+import thunk from "redux-thunk";
+
+
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
 
 const client = new ApolloClient({
   uri: "https://nottheinsta.herokuapp.com/graphql/",
+  // uri: "http://localhost:8000/graphql/",
 
   request: operation => {
     const token = localStorage.getItem("authToken") || "";
@@ -44,9 +55,11 @@ const IS_LOGGEDIN_QUERY = gql`
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <Query query={IS_LOGGEDIN_QUERY}>
-      {({ data }) => (data.isLoggedIn ? <App /> : <Auth />)}
-    </Query>
+    <Provider store={store}>
+      <Query query={IS_LOGGEDIN_QUERY}>
+        {({ data }) => (data.isLoggedIn ? <App /> : <Auth />)}
+      </Query>
+    </Provider>
   </ApolloProvider>,
   document.getElementById("root")
 );
