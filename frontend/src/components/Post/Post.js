@@ -6,11 +6,12 @@ import { gql } from "apollo-boost";
 import { Mutation } from "react-apollo";
 import { Link } from "react-router-dom";
 import Like from "../Like";
+import { POSTS_QUERY } from "../pages/homepage/PostList";
 
 class Post extends Component {
   state = {
     content: "",
-    postId: ""
+    postId: "",
   };
 
   render() {
@@ -52,36 +53,40 @@ class Post extends Component {
         </header>
         <div className="Post-image">
           <div className="Post-image-bg">
-            <img 
-             onDoubleClick={(event)=>{
-
-              console.log("I like this")}
-            }
-            
-            alt="Icon Living" src={`${this.props.post.image}`} />
+            <img
+              onDoubleClick={(event) => {
+                console.log("I like this");
+              }}
+              alt="Icon Living"
+              src={`${this.props.post.image}`}
+            />
           </div>
         </div>
         <div>
           {console.log(this.props.post.likes.length)}
-          <Like postId={this.props.post.id} likeCount = {this.props.post.likes.length} />
+          <Like
+            postId={this.props.post.id}
+            likeCount={this.props.post.likes.length}
+          />
         </div>
-        <br/>
+        <br />
         <div className="Post-caption">
           <strong>{this.props.post.caption}</strong>
         </div>
         <div>
           <h6>comments</h6>
 
-          {this.props.post.comments.map(comment => (
+          {this.props.post.comments.map((comment) => (
             <Comment key={comment.id} comment={comment} />
           ))}
 
           <Mutation
             mutation={CREATE_COMMENT}
             variables={{ content, postId }}
-            onCompleted={data => {
+            onCompleted={(data) => {
               console.log({ data });
             }}
+            refetchQueries={() => [{ query: POSTS_QUERY }]}
           >
             {(createComment, { loading, error }) => {
               if (loading) return <div>Loading...</div>;
@@ -90,17 +95,17 @@ class Post extends Component {
               return (
                 <Form.Row
                   className="mt-3"
-                  onSubmit={event => handleSubmit(event, createComment)}
+                  onSubmit={(event) => handleSubmit(event, createComment)}
                 >
                   <Form.Group as={Col}>
                     <Form.Control
                       type="text"
                       placeholder="Post a comment"
                       value={content}
-                      onChange={event =>
+                      onChange={(event) =>
                         this.setState({
                           content: event.target.value,
-                          postId: this.props.post.id
+                          postId: this.props.post.id,
                         })
                       }
                     />
@@ -110,7 +115,7 @@ class Post extends Component {
                       variant="primary"
                       size="sm"
                       type="submit"
-                      onClick={event => handleSubmit(event, createComment)}
+                      onClick={(event) => handleSubmit(event, createComment)}
                     >
                       Comment
                     </Button>{" "}
