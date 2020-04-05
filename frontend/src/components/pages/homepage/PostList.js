@@ -32,7 +32,7 @@ class PostList extends Component {
 }
 export default withRouter(PostList);
 
-const POSTS_QUERY = gql`
+export const POSTS_QUERY = gql`
 {
   posts {
     id
