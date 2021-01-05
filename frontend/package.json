@@ -8,7 +8,7 @@
     "@testing-library/user-event": "^7.1.2",
     "@uploadcare/react-widget": "^1.2.5",
     "apollo-boost": "^0.4.7",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bootstrap": "^4.4.1",
     "graphql": "^14.6.0",
     "react": "^16.13.0",
